@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
-export var turn_force2: float = 1
-export var move_force2: float = 1
+export var turn_force: float = 0.02
+export var move_force: float = 100
 
-export var friction2: float = .3
-export var radial_friction2: float = .2
+export var friction: float = .3
+export var radial_friction: float = .2
 
 var vel: Vector2 = Vector2.ZERO
 var radial_vel: float = 0
@@ -14,35 +14,39 @@ var down: bool = false
 var left: bool = false
 var right: bool = false
 var dash: bool = false
-onready var mapsize = get_node("res://scenes/game.tscn").mapsize
 
+var mapsize = Vector2(4096,2400)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	 # Replace with function body.
-	 # print(mapsize)
-	pass
-	
+	pass # Replace with function body.
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-# Moved player control to only PlayerBoat
+
+	
+
 
 func _physics_process(delta):
 	if left:
-		radial_vel -= turn_force2
+		radial_vel -= turn_force
 	if right:
-		radial_vel += turn_force2
+		radial_vel += turn_force
 	var dir = Vector2.UP.rotated(rotation)
 	if up:
-		vel += dir * move_force2
+		vel += dir * move_force
 	if down:
-		vel -= dir * move_force2
+		vel -= dir * move_force
 
-	vel *= (1 - friction2)
-	radial_vel *= (1 - radial_friction2)
+	vel *= (1 - friction)
+	radial_vel *= (1 - radial_friction)
 
 	vel = move_and_slide(vel)
 	rotate(radial_vel)
-	#print(position.x, position.y)
+	
+	# print("radial vel:", radial_vel, "dir:", dir)
+	
+	
 	if position.x > mapsize.x:
 		position.x = 0
 	if position.x < 0:
@@ -51,6 +55,7 @@ func _physics_process(delta):
 		position.y = 0
 	if position.y < 0:
 		position.y = mapsize.y
-	
+
+
 func dash(power: float):
 	var dir = Vector2.ZERO

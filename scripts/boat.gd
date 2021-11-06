@@ -15,7 +15,7 @@ var left: bool = false
 var right: bool = false
 var dash: bool = false
 
-onready var mapsize = get_node("res://scenes/game.tscn").mapsize
+onready var mapsize = Vector2(4096,2400)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,7 +49,9 @@ func _physics_process(delta):
 	vel = move_and_slide(vel)
 	rotate(radial_vel)
 	
-	print("radial vel:", radial_vel, "dir:", dir)
+	#print("radial vel:", radial_vel, "dir:", dir)
+	
+	
 	if position.x > mapsize.x:
 		position.x = 0
 	if position.x < 0:

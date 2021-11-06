@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/PlayerCamera.gd" type="Script" id=1]
 [ext_resource path="res://scripts/boat.gd" type="Script" id=2]
-[ext_resource path="res://sprites/SeaSheepRaft.png" type="Texture" id=3]
+[ext_resource path="res://sprites/SeaSheepRaft_Shrunk.png" type="Texture" id=3]
 [ext_resource path="res://sprites/pointy_shape_transparent.png" type="Texture" id=4]
 [ext_resource path="res://scripts/BoatSprite.gd" type="Script" id=5]
 
@@ -25,7 +25,6 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 4 )
 
 [node name="BoatSprite" type="Sprite" parent="."]
-scale = Vector2( 0.08, 0.11 )
 texture = ExtResource( 3 )
 script = ExtResource( 5 )
 
