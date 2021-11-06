@@ -3,7 +3,7 @@ extends KinematicBody2D
 export var turn_force: float = 0.02
 export var move_force: float = 100
 
-export var friction: float = .3
+export var friction: float = .2
 export var radial_friction: float = .2
 
 var vel: Vector2 = Vector2.ZERO
@@ -14,6 +14,10 @@ var down: bool = false
 var left: bool = false
 var right: bool = false
 var dash: bool = false
+var dashframes: int = 0
+var dashmultiplier: float = 1.1
+var maxdash: int = 300
+
 
 onready var mapsize = Vector2(4096,2400)
 
@@ -28,7 +32,7 @@ func _process(delta):
 	down = Input.is_action_pressed("down")
 	left = Input.is_action_pressed("left")
 	right = Input.is_action_pressed("right")
-	dash = dash || Input.is_action_just_pressed("dash")
+	dash = Input.is_action_pressed("dash")
 	
 
 
@@ -53,14 +57,22 @@ func _physics_process(delta):
 	
 	
 	if position.x > mapsize.x:
-		position.x = 0
+		position.x -= mapsize.x
 	if position.x < 0:
-		position.x = mapsize.x
+		position.x += mapsize.x
 	if position.y > mapsize.y:
-		position.y = 0
+		position.y -= mapsize.y
 	if position.y < 0:
-		position.y = mapsize.y
-
+		position.y += mapsize.y
+	
+	if dash:
+		vel = Vector2.ZERO
+		dashframes += 1
+	else: 
+		if dashframes > 0:
+			vel += dir * move_force * min(dashframes,maxdash) * dashmultiplier
+		dashframes = 0
 
 func dash(power: float):
 	var dir = Vector2.ZERO
+
