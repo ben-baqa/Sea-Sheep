@@ -14,7 +14,7 @@ var down: bool = false
 var left: bool = false
 var right: bool = false
 var dash: bool = false
-onready var mapsize = get_node("..").mapsize
+onready var mapsize = get_node("res://scenes/game.tscn").mapsize
 
 
 # Called when the node enters the scene tree for the first time.
