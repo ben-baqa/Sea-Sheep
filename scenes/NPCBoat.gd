@@ -23,12 +23,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	up = Input.is_action_pressed("up")
-	down = Input.is_action_pressed("down")
-	left = Input.is_action_pressed("left")
-	right = Input.is_action_pressed("right")
-	dash = dash || Input.is_action_just_pressed("dash")
+
 	
 
 
