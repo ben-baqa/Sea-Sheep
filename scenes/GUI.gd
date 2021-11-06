@@ -1,7 +1,5 @@
-extends Label
+extends Node2D
 
-
-var boat_distance = Vector2()
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -15,4 +13,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	#position = camera.get_camera_transform()
+	print(position)
