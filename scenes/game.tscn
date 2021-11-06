@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/SeaSheepRaft.png" type="Texture" id=1]
 [ext_resource path="res://scripts/boat.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sprites/map_shape.png" type="Texture" id=7]
 [ext_resource path="res://sprites/pointy_shape_transparent.png" type="Texture" id=8]
 [ext_resource path="res://scenes/NPCBoat.gd" type="Script" id=9]
+[ext_resource path="res://scenes/BoatSpriteNPC.gd" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.7244
@@ -20,75 +21,98 @@ radius = 16.7244
 [node name="game" type="Node2D"]
 script = ExtResource( 6 )
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="PlayerBoatGroup" type="Node" parent="."]
+
+[node name="PlayerBoat" type="KinematicBody2D" parent="PlayerBoatGroup"]
+position = Vector2( 300, 299 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoatGroup/PlayerBoat"]
+scale = Vector2( 1.4, 1.4 )
+shape = SubResource( 1 )
+
+[node name="PointyShape" type="Sprite" parent="PlayerBoatGroup/PlayerBoat"]
+position = Vector2( 0, -5 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 8 )
+
+[node name="BoatSprite" type="Sprite" parent="PlayerBoatGroup"]
+scale = Vector2( 0.08, 0.11 )
+texture = ExtResource( 1 )
+script = ExtResource( 5 )
+
+[node name="PlayerCamera" type="Camera2D" parent="PlayerBoatGroup"]
 position = Vector2( 0.594604, 0 )
 current = true
 process_mode = 0
 script = ExtResource( 3 )
 
-[node name="BoatSprite" type="Sprite" parent="."]
-scale = Vector2( 0.08, 0.11 )
-texture = ExtResource( 1 )
-script = ExtResource( 5 )
+[node name="NPCBoatGroup" type="Node" parent="."]
 
-[node name="PlayerBoat" type="KinematicBody2D" parent="."]
-position = Vector2( 300, 299 )
-script = ExtResource( 2 )
+[node name="NPCBoat" type="KinematicBody2D" parent="NPCBoatGroup"]
+position = Vector2( 1735.88, 978.744 )
+script = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="NPCBoatGroup/NPCBoat"]
 scale = Vector2( 1.4, 1.4 )
 shape = SubResource( 1 )
 
-[node name="PointyShape" type="Sprite" parent="PlayerBoat"]
-position = Vector2( 0, -5 )
+[node name="PointyShape2" type="Sprite" parent="NPCBoatGroup/NPCBoat"]
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 8 )
 
-[node name="Obstacle" type="StaticBody2D" parent="."]
+[node name="BoatSpriteNPC" type="Sprite" parent="NPCBoatGroup"]
+scale = Vector2( 0.08, 0.11 )
+texture = ExtResource( 1 )
+script = ExtResource( 10 )
+
+[node name="Obstacles" type="Node" parent="."]
+
+[node name="Obstacle" type="StaticBody2D" parent="Obstacles"]
 position = Vector2( 1068.14, 770.167 )
 physics_material_override = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Obstacle"]
+[node name="Sprite" type="Sprite" parent="Obstacles/Obstacle"]
 scale = Vector2( 0.292039, 0.263347 )
 texture = ExtResource( 4 )
 
-[node name="Obstacle2" type="StaticBody2D" parent="."]
+[node name="Obstacle2" type="StaticBody2D" parent="Obstacles"]
 position = Vector2( 1189.71, -53.4485 )
 physics_material_override = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle2"]
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Obstacle2"]
+[node name="Sprite" type="Sprite" parent="Obstacles/Obstacle2"]
 scale = Vector2( 0.292039, 0.263347 )
 texture = ExtResource( 4 )
 
-[node name="Obstacle3" type="StaticBody2D" parent="."]
+[node name="Obstacle3" type="StaticBody2D" parent="Obstacles"]
 position = Vector2( 641.5, 311 )
 physics_material_override = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle3"]
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Obstacle3"]
+[node name="Sprite" type="Sprite" parent="Obstacles/Obstacle3"]
 scale = Vector2( 0.292039, 0.263347 )
 texture = ExtResource( 4 )
 
-[node name="Obstacle4" type="StaticBody2D" parent="."]
+[node name="Obstacle4" type="StaticBody2D" parent="Obstacles"]
 position = Vector2( 733.703, 58.6976 )
 physics_material_override = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle4"]
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Obstacle4"]
+[node name="Sprite" type="Sprite" parent="Obstacles/Obstacle4"]
 scale = Vector2( 0.292039, 0.263347 )
 texture = ExtResource( 4 )
 
-[node name="fake_sprite" type="Sprite" parent="Obstacle4"]
+[node name="fake_sprite" type="Sprite" parent="Obstacles/Obstacle4"]
 position = Vector2( 0, 2400 )
 scale = Vector2( 0.292039, 0.263347 )
 texture = ExtResource( 4 )
@@ -161,17 +185,3 @@ polygon = PoolVector2Array( 320, 317.1, 320, 318.6, 335, 323.6, 335, 325.1, 357,
 
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Map_shape/StaticBody2D"]
 polygon = PoolVector2Array( 113, 338.2, 113, 339.8, 133.5, 350, 147.5, 350, 153.5, 347, 163.3, 347, 168, 348.6, 168, 350.2, 174, 356.2, 174, 361, 175.2, 374, 173.2, 374, 160.2, 400, 88, 400, 83, 390.5, 83, 385.4, 76.6, 352, 78.9, 352, 85.9, 341, 88.9, 341, 98, 338.5, 98, 336.8 )
-
-[node name="NPCBoat" type="KinematicBody2D" parent="."]
-position = Vector2( 188.561, 18.5823 )
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="NPCBoat"]
-position = Vector2( 300, 299 )
-scale = Vector2( 1.4, 1.4 )
-shape = SubResource( 1 )
-
-[node name="PointyShape2" type="Sprite" parent="NPCBoat"]
-position = Vector2( 300, 294 )
-scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 8 )
