@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sea Sheep"
+run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
 
 [input]
@@ -60,4 +61,5 @@ dash={
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.403922, 0.423529, 0.941176, 1 )
 environment/default_environment="res://default_env.tres"
