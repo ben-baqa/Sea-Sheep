@@ -1,13 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/PlayerCamera.gd" type="Script" id=1]
-[ext_resource path="res://scripts/boat.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Player_Boat.gd" type="Script" id=2]
 [ext_resource path="res://sprites/SeaSheepRaft_Shrunk.png" type="Texture" id=3]
 [ext_resource path="res://sprites/pointy_shape_transparent.png" type="Texture" id=4]
 [ext_resource path="res://scripts/BoatSprite.gd" type="Script" id=5]
+[ext_resource path="res://sprites/SheepStand.png" type="Texture" id=6]
+[ext_resource path="res://sprites/SheepCrouch.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.7244
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.3
+} ]
 
 [node name="PlayerBoatGroup" type="Node"]
 
@@ -27,6 +37,12 @@ texture = ExtResource( 4 )
 [node name="BoatSprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="BoatSprite"]
+position = Vector2( 0, -10 )
+scale = Vector2( 0.15, 0.15 )
+frames = SubResource( 2 )
+playing = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2( 0.594604, 0 )

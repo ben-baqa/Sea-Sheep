@@ -27,12 +27,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	up = Input.is_action_pressed("up")
-	down = Input.is_action_pressed("down")
-	left = Input.is_action_pressed("left")
-	right = Input.is_action_pressed("right")
-	dash = Input.is_action_pressed("dash")
+
 	
 
 
@@ -73,6 +68,5 @@ func _physics_process(delta):
 			vel += dir * move_force * min(dashframes,maxdash) * dashmultiplier
 		dashframes = 0
 
-func dash(power: float):
-	var dir = Vector2.ZERO
+
 
