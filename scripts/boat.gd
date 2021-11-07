@@ -18,6 +18,7 @@ var dashframes: int = 0
 var dashmultiplier: float = 1.1
 var maxdash: int = 300
 
+var dir = Vector2.UP.rotated(rotation)
 
 onready var mapsize = Vector2(4096,2400)
 
@@ -36,7 +37,7 @@ func _physics_process(delta):
 		radial_vel -= turn_force
 	if right:
 		radial_vel += turn_force
-	var dir = Vector2.UP.rotated(rotation)
+	dir = Vector2.UP.rotated(rotation)
 	if up:
 		vel += dir * move_force
 	if down:
